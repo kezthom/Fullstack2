@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <title>21 Savage Fan Site</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-book"></span> My Book Library</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <!-- BOOK LIST -->
+        <div class="col-sm-12">
+            <div class="well">
+                <h3><span class="fa fa-book"></span> Books</h3>
+
+                <ul>
+                    <% books.forEach(function(book) { %>
+                        <li>
+                            <%= book.title %> by <%= book.author %>
+                            <form action="/books/<%= book._id %>?_method=PUT" method="POST">
+                                <select name="status" onchange="this.form.submit()">
+                                    <option value="To Read" <%= (book.status === 'To Read') ? 'selected' : '' %>>To Read</option>
+                                    <option value="Reading" <%= (book.status === 'Reading') ? 'selected' : '' %>>Reading</option>
+                                    <option value="Read" <%= (book.status === 'Read') ? 'selected' : '' %>>Read</option>
+                                </select>
+                            </form>
+                            <form action="/books/<%= book._id %>?_method=DELETE" method="POST">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </li>
+                    <% }); %>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+<script src="main.js"></script>
+
+</body>
+</html>
